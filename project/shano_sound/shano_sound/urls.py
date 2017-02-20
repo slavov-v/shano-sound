@@ -19,6 +19,7 @@ from user_connections import views as user_connections_views
 
 
 urlpatterns = [
+    url(r'', include('user_management.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'', include('user_connections.urls')),
     url(r'', include('user_management.urls')),

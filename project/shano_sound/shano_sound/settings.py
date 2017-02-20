@@ -1,3 +1,4 @@
+
 """
 Django settings for shano_sound project.
 
