@@ -14,7 +14,7 @@ def register_view(request):
         if not User.exists(request.POST['email']):
             if reg_form.is_valid():
                 reg_form.hash_password()
-            reg_form.save()
+                reg_form.save()
             return redirect('/login')
         else:
             return render(request, 'register_form.html', locals())
@@ -28,12 +28,12 @@ def login_view(request):
     if request.method == 'POST':
         login_form = RegisterAndLoginForm(request.POST)
         if not User.exists(request.POST['email']):
-            # import ipdb; ipdb.set_trace()
-            return register_view(request)
+            import ipdb; ipdb.set_trace()
+            return redirect('/register')
         else:
             if User.validate_password(request.POST['email'], request.POST['password']):
                 request.session['email'] = request.POST['email']
-                return render(request, 'login_form.html', locals())
+                return temp_profile_view(request)
             else:
                 error = "Invalid password"
     if request.method == 'GET':
@@ -44,4 +44,5 @@ def login_view(request):
         return render(request, 'login_form.html', locals())
 
 def temp_profile_view(request, *args, **kwargs):
-    return HttpResponse("Greetings {}".format(request.session['email']))
+    user_email = request.session['email']
+    return render(request, 'profile_page.html', locals())
