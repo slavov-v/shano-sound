@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+    </title>
+  </head>
+  <body>
+    <form  action="." method="post">
+      {% csrf_token %}
+      {%for field in reg_form%}
+      <p>
+        {{field.label_tag}} {{field}}
+      </p>
+      {%endfor%}
+    <input type="submit" name="reg_submit" value="Register">
+    </form>
+  </body>
+</html>
