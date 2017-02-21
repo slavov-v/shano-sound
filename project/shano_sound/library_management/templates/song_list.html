@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<!-- {%load static%} -->
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <table>
+      <p>
+        <a href="/newsong">Add new song</a>
+      </p>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          File Name
+        </th>
+        <th>
+          Audio
+        </th>
+      </tr>
+      {%for song in object_list%}
+      <tr>
+        <td>
+          {{song.name}}
+        </td>
+        <td>
+          {{song.song_file}}
+        </td>
+        <td>
+          <audio controls="" name="media"><source src="http://localhost:8000/mymusic/mymusic/{{song.id}}" type="audio/mp3"></audio>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+  </body>
+</html>

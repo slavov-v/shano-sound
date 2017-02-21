@@ -18,6 +18,7 @@ from django.contrib import admin
 
 
 urlpatterns = [
+    url(r'', include('library_management.urls')),
     url(r'', include('user_management.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'', include('user_management.urls')),
