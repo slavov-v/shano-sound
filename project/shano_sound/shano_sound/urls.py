@@ -15,13 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from user_connections import views as user_connections_views
 
 
 urlpatterns = [
     url(r'', include('user_management.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'', include('user_connections.urls')),
     url(r'', include('user_management.urls')),
-    url(r'thanks', user_connections_views.thanks),
+    url(r'', include('chat.urls')),
 ]
