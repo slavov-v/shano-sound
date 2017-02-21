@@ -23,3 +23,6 @@ class User(models.Model):
         if password == obj.password:
             return True
         return False
+
+    def __str__(self):
+        return self.email
