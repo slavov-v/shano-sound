@@ -2,12 +2,15 @@ import os
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, FormView, View
 from django.core.files import File
+from django.utils.decorators import method_decorator
 from library_management.models import Song
 from user_management.models import User
 from library_management.forms import NewSongForm
+from user_management.decorators import login_required
+from library_management.helpers import SongMetadataLoader
 # Create your views here.
 
-
+@method_decorator(login_required, name="dispatch")
 class MyMusicView(ListView):
     model = Song
     template_name = 'song_list.html'
@@ -16,7 +19,17 @@ class MyMusicView(ListView):
         user = User.objects.get(email=self.request.session['email'])
         return Song.objects.filter(user_id=user)
 
+@method_decorator(login_required, name="dispatch")
+class FriendPlaylistView(ListView):
+    model = Song
+    template_name = 'friend_song_list.html'
 
+    def get_queryset(self):
+        # import ipdb; ipdb.set_trace()
+        user = User.objects.get(id=int(self.kwargs['pk'][:-1]))
+        return Song.objects.filter(user_id=user)
+
+@method_decorator(login_required, name="dispatch")
 class NewSongView(View):
     def get(self, request):
         form = NewSongForm()
@@ -29,9 +42,12 @@ class NewSongView(View):
             # import ipdb; ipdb.set_trace()
             user_id = User.objects.get(email=request.session['email']).id
             form.cleaned_data['user_id'] = user_id
-            form.save()
+            song_instance = form.save()
         print(form.errors)
+        loader = SongMetadataLoader(song_instance)
+        loader.populate_metada_for_song()
         return redirect('/mymusic')
+
 
 class PlaySongView(View):
     def get(self, request, **kwargs):

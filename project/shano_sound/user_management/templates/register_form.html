@@ -1,19 +1,37 @@
+{%extends 'header.html'%}
+{%block content%}
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title>
     </title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <style media="screen">
+      h1, h2, input, button {
+        font-family: fantasy;
+      }
+    </style>
   </head>
   <body>
-    <form  action="." method="post">
-      {% csrf_token %}
-      {%for field in reg_form%}
-      <p>
-        {{field.label_tag}} {{field}}
-      </p>
-      {%endfor%}
-    <input type="submit" name="reg_submit" value="Register">
-    </form>
+    <div class="container">
+      <div class="jumbotron">
+        <h2>Register page</h2>
+      </div>
+    </div>
+    <div class="container">
+      <form  action="." method="post">
+        {% csrf_token %}
+        {%for field in reg_form%}
+        <p>
+          {{field.label_tag}} {{field}}
+        </p>
+        {%endfor%}
+      <input class="btn btn-primary btn-md" type="submit" name="reg_submit" value="Register">
+      </form>
+    </div>
+
   </body>
 </html>
+{%endblock%}

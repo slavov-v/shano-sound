@@ -8,6 +8,7 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
     is_online = models.BooleanField(default=False)
+    friends = models.ManyToManyField(to='User')
 
     @classmethod
     def exists(cls, mail):

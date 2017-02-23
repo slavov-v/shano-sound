@@ -2,12 +2,11 @@
 {%block content%}
 <!DOCTYPE html>
 <html>
-<!-- {%load static%} -->
   <head>
     <meta charset="utf-8">
+    <title></title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <title></title>
     <style media="screen">
       h1, h2, button, input {
         font-family: 'Fantasy';
@@ -20,7 +19,7 @@
   <body>
     <div class="container">
       <div class="jumbotron">
-        <h2>Your playlist</h2>
+        <h2>Your Friend list</h2>
         <div class="container">
 
         </div>
@@ -28,44 +27,31 @@
     </div>
     <div class="container">
       <p>
-        <a href="/newsong" class="btn btn-primary btn-block">Add new song</a>
+        <a href="/add-friend" class="btn btn-primary btn-block">Add new friend</a>
       </p>
     <table class="table table-striped">
       <tr>
         <th>
-          Name
+          E-mail
         </th>
         <th>
-          Metadata
+          Playlist
         </th>
-        <th>
-          Audio
-        </th>
-      </tr>
-      {%for song in object_list%}
+        </tr>
+      {%for friend in object_list%}
       <tr>
         <td>
-          {{song.name}}
+          {{friend.email}}
         </td>
         <td>
-          <p>
-            Artist: {{song.metadata.artist}}
-          </p>
-          <p>
-            Name: {{song.metadata.name}}
-          </p>
-          <p>
-            Album: {{song.metadata.album}}
-          </p>
+          <a href="/playlist/{{friend.id}}">
+            <button class="btn btn-primary btn-block" type="button" name="button">View playlist</button>
+          </a>
         </td>
-        <td>
-            <audio controls="" name="media"><source src="http://localhost:8000/mymusic/mymusic/{{song.id}}" type="audio/mp3"></audio>
-        </td>
-      </tr>
+        </tr>
       {% endfor %}
     </table
     </div>
-    {{errors}}
   </body>
 </html>
 {%endblock%}

@@ -16,21 +16,17 @@
   <body>
     <div class="container">
       <div class="jumbotron">
-        <h2>Login page</h2>
+        <h2>Add new friend</h2>
       </div>
     </div>
     <div class="container">
-      <form action="." method="post">
-        {% csrf_token %}
-        {%for field in login_form%}
-        <p>
-          {{field.label_tag}} {{field}}
-        </p>
-        {%endfor%}
-        <input class="btn btn-primary btn-md" type="submit" name="log_form" value="Log in">
+      <form class="" action="." method="post">
+        {%csrf_token%}
+        {{form.as_p}}
+        <input class="btn btn-primary btn-md" type="submit" name="friend_search" value="Search!">
+        {{errors}}
       </form>
     </div>
-
   </body>
 </html>
 {%endblock%}
