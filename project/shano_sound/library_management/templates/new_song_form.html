@@ -1,16 +1,36 @@
+{%extends 'header.html'%}
+{%block content%}
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <meta charset="utf-8">
     <title></title>
+    <style media="screen">
+      h1, h2, button, input {
+        font-family: fantasy;
+      }
+      input {
+        font-family: fantasy;
+      }
+    </style>
   </head>
   <body>
-    <form enctype="multipart/form-data" action="." method="post">
-      {%csrf_token%}
-      {%for field in form%}
-        {{field.label_tag}} {{field}}
-      {%endfor%}
-      <input type="submit" name="add_song" value="Add">
-    </form>
+    <div class="container">
+        <div class="jumbotron">
+          <h2>Add new song</h2>
+        </div>
+    </div>
+    <div class="container">
+      <form class="form-inline" enctype="multipart/form-data" action="." method="post">
+        {%csrf_token%}
+        {%for field in form%}
+          {{field.label_tag}} {{field}}
+        {%endfor%}
+        <input class="btn btn-primary btn-md" type="submit" name="add_song" value="Add">
+      </form>
+    </div>
   </body>
 </html>
+{%endblock%}

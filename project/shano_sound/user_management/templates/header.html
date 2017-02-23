@@ -1,5 +1,3 @@
-{%extends 'header.html'%}
-{%block content%}
 <!DOCTYPE html>
 <html>
   <head>
@@ -8,29 +6,24 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <style media="screen">
-      h1, h2, input, button {
+      h1 {
         font-family: fantasy;
       }
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <div class="jumbotron">
-        <h2>Login page</h2>
+        <h1>Shano Sound</h1>
+        <p>
+          Music sharing for friends
+        </p>
+        <a href="/profile">
+          <button class="btn btn-primary btn-lg" type="button" name="button">Go to profile</button>
+        </a>
       </div>
     </div>
-    <div class="container">
-      <form action="." method="post">
-        {% csrf_token %}
-        {%for field in login_form%}
-        <p>
-          {{field.label_tag}} {{field}}
-        </p>
-        {%endfor%}
-        <input class="btn btn-primary btn-md" type="submit" name="log_form" value="Log in">
-      </form>
-    </div>
-
+    {% block content %}
+    {% endblock %}
   </body>
 </html>
-{%endblock%}

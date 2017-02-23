@@ -7,6 +7,7 @@ from hashlib import sha256
 class User(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=128)
+    friends = models.ManyToManyField(to='User')
 
     @classmethod
     def exists(cls, mail):
