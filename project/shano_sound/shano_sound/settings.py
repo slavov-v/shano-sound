@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'user_management',
     'chat',
     'library_management',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
