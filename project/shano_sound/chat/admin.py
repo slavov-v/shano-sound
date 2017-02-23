@@ -1,5 +1,5 @@
 from django.contrib import admin
-from chat.models import Chat, Message, MembershipInChat
+from chat.models import Chat, Message
 
 
 @admin.register(Chat)
@@ -9,9 +9,9 @@ class ChatAdmin(admin.ModelAdmin):
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ['id', 'content', 'membership']
+    list_display = ['id', 'content']
 
 
-@admin.register(MembershipInChat)
-class MembershipAdmin(admin.ModelAdmin):
-    list_display = ['id', 'chat_room', 'user']
+# @admin.register(MembershipInChat)
+# class MembershipAdmin(admin.ModelAdmin):
+#     list_display = ['id', 'chat_room', 'user']

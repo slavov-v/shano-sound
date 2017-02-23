@@ -1,8 +1,8 @@
 from django.conf.urls import url
-from chat.views import ChatFormView
-
+from chat.views import chat, send_message, get_messages
 
 urlpatterns = [
-    url(r'chat_window/(?P<user_id>\d+)/(?P<chatroom_id>\d+)',
-        ChatFormView.as_view(), name='chat'),
+    url(r'send-message$', send_message, name="send_message"),
+    url(r'get-messages$', get_messages, name="get_message"),
+    url(r'chat/$', chat, name='chat'),
 ]

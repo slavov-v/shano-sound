@@ -1,0 +1,59 @@
+body{
+	margin: 0;
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+}
+
+.row {
+	margin:0;
+}
+
+.message-container {
+	height: 80vh;
+	border: 1px solid #aaaaff;
+	overflow-y: scroll;
+}
+
+.message-container .message {
+	margin:20px;
+	border-bottom:1px solid silver;
+	font-size: 24px;
+}
+
+.message-container .message .sender {
+	color:#33f;
+	font-weight: bold;
+	display:inline;
+	padding-right:10px;
+}
+
+.message-container .message .content {
+	display:inline;
+}
+
+.online-users {
+	height: 80vh;
+	border: 1px solid #aaf;
+}
+
+.online-users .user {
+	margin:10px;
+	border-bottom:1px solid silver;
+	cursor:pointer;
+}
+
+.online-users .user:hover {
+	background-color:#ccc;
+}
+
+.chat-form textarea {
+	display: inline-block;
+	height: 20vh;
+	font-size: 20px;
+}
+
+.chat-form input {
+	height: 20vh;
+	padding: 0;
+	font-size: 20px;
+}

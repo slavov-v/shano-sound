@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'user_management',
     'chat',
     'library_management',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -120,8 +121,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "static"),
-#     'library_management/static',
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 STATIC_URL = '/static/'

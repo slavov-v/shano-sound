@@ -8,6 +8,7 @@ from user_management.forms import RegisterAndLoginForm
 from user_management.helpers import session_exists
 # Create your views here.
 
+
 def register_view(request):
     if request.method == 'POST':
         reg_form = RegisterAndLoginForm(request.POST)
