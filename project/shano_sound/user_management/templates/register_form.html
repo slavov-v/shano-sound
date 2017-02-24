@@ -23,7 +23,7 @@
     <div class="container">
       <form  action="." method="post">
         {% csrf_token %}
-        {%for field in reg_form%}
+        {%for field in form%}
         <p>
           {{field.label_tag}} {{field}}
         </p>

@@ -8,29 +8,31 @@ from user_management.models import User
 from library_management.forms import NewSongForm
 from user_management.decorators import login_required
 from library_management.helpers import SongMetadataLoader
+from django.contrib.auth.mixins import LoginRequiredMixin
+from user_management.models import BaseUser
 # Create your views here.
 
-@method_decorator(login_required, name="dispatch")
-class MyMusicView(ListView):
+# @method_decorator(login_required, name="dispatch")
+class MyMusicView(LoginRequiredMixin, ListView):
     model = Song
     template_name = 'song_list.html'
 
     def get_queryset(self):
-        user = User.objects.get(email=self.request.session['email'])
+        user = BaseUser.objects.get(email=self.request.user.email)
         return Song.objects.filter(user_id=user)
 
-@method_decorator(login_required, name="dispatch")
-class FriendPlaylistView(ListView):
+# @method_decorator(login_required, name="dispatch")
+class FriendPlaylistView(LoginRequiredMixin, ListView):
     model = Song
     template_name = 'friend_song_list.html'
 
     def get_queryset(self):
         # import ipdb; ipdb.set_trace()
-        user = User.objects.get(id=int(self.kwargs['pk'][:-1]))
+        user = BaseUser.objects.get(id=int(self.kwargs['pk'][:-1]))
         return Song.objects.filter(user_id=user)
 
-@method_decorator(login_required, name="dispatch")
-class NewSongView(View):
+# @method_decorator(login_required, name="dispatch")
+class NewSongView(LoginRequiredMixin, View):
     def get(self, request):
         form = NewSongForm()
         return render(request, 'new_song_form.html', locals())
@@ -39,8 +41,8 @@ class NewSongView(View):
         form = NewSongForm(request.POST, request.FILES)
         # import ipdb; ipdb.set_trace()
         if form.is_valid():
-            # import ipdb; ipdb.set_trace()
-            user_id = User.objects.get(email=request.session['email']).id
+            import ipdb; ipdb.set_trace()
+            user_id = BaseUser.objects.get(email=request.user.email).id
             form.cleaned_data['user_id'] = user_id
             song_instance = form.save()
         print(form.errors)
@@ -53,7 +55,7 @@ class PlaySongView(View):
     def get(self, request, **kwargs):
         song_id = int(self.kwargs['pk'][:-1])
         song = Song.objects.get(id=song_id)
-        user = User.objects.get(email=self.request.session['email'])
+        user = BaseUser.objects.get(email=self.request.user.email)
         object_list = Song.objects.filter(user_id=user)
 
         file_name = str(song.song_file)

@@ -20,9 +20,14 @@
       </div>
     </div>
     <div class="container">
+      {% if error %}
+        <div class="bg-warning error">
+          {{error}}
+        </div>
+      {%endif%}
       <form action="." method="post">
         {% csrf_token %}
-        {%for field in login_form%}
+        {%for field in form%}
         <p>
           {{field.label_tag}} {{field}}
         </p>
