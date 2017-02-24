@@ -12,8 +12,7 @@ def chat(request):
 
 
 def send_message(request):
-    user = User.objects.first()
-    # TODO: Take request.user intead of User.objects.first()
+    user = request.user
     message = Message.objects.create(sender=user,
                                      content=request.POST.get("message"))
     message.save()
