@@ -13,6 +13,7 @@ class BaseUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     friends = models.ManyToManyField(to='BaseUser')
+    is_online = models.BooleanField(default=False)
     USERNAME_FIELD = 'email'
     objects = UserManager()
 

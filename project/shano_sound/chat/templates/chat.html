@@ -24,7 +24,7 @@
       {% endfor %}
     </div>
     <div class="row chat-form">
-      <form action="" method="post">
+      <form action="" method="post" class="chat-send-message">
         {% csrf_token %}
         <textarea name="message" class="col-md-10"></textarea>
         <input type="submit" name="Submit" value="Send" class="col-md-2">

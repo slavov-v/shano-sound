@@ -4,6 +4,10 @@ body{
 	font-size: 16px;
 }
 
+a {
+	color:inherit !important;
+}
+
 .row {
 	margin:0;
 }
@@ -56,4 +60,18 @@ body{
 	height: 20vh;
 	padding: 0;
 	font-size: 20px;
+}
+
+.header-container {
+	padding-top:30px;
+	padding-bottom:30px;
+	background-size:cover;
+	background-position:0 -128px;
+	background-image:url(https://thumbs.dreamstime.com/z/sound-waves-white-background-39133829.jpg);
+}
+.navbar a {
+	color: #fff !important;
+}
+.navbar a:hover {
+	color:lightblue !important;
 }

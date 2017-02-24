@@ -1,67 +1,45 @@
-{% extends "header.html" %}
+{% extends "base.html" %}
 {%block content%}
-<!DOCTYPE html>
-<html>
-<!-- {%load static%} -->
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <title></title>
-    <style media="screen">
-      h1, h2, button, input {
-        font-family: 'Fantasy';
-      }
-      a {
-        font-family: 'Fantasy';
-      }
-    </style>
-
-  </head>
-  <body>
-    <div class="container">
-      <div class="jumbotron">
-        <h2>Friend playlist</h2>
-        </div>
-    </div>
-    <div class="container">
-    <table class="table table-striped">
-      <tr>
-        <th>
-          Name
-        </th>
-        <th>
-          Metadata
-        </th>
-        <th>
-          Audio
-        </th>
-      </tr>
-      {%for song in object_list%}
-      <tr>
-        <td>
-          {{song.name}}
-        </td>
-        <td>
-          <p>
-            Artist: {{song.metadata.artist}}
-          </p>
-          <p>
-            Name: {{song.metadata.name}}
-          </p>
-          <p>
-            Album: {{song.metadata.album}}
-          </p>
-        </td>
-        <td>
-            <audio controls="" name="media"><source src="http://localhost:8000/mymusic/mymusic/{{song.id}}" type="audio/mp3"></audio>
-        </td>
-      </tr>
-      {% endfor %}
-    </table
-    </div>
-    {{errors}}
-
-  </body>
-</html>
+  <div class="container">
+    <div class="jumbotron">
+      <h2>Friend playlist</h2>
+      </div>
+  </div>
+  <div class="container">
+  <table class="table table-striped">
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Metadata
+      </th>
+      <th>
+        Audio
+      </th>
+    </tr>
+    {%for song in object_list%}
+    <tr>
+      <td>
+        {{song.name}}
+      </td>
+      <td>
+        <p>
+          Artist: {{song.metadata.artist}}
+        </p>
+        <p>
+          Name: {{song.metadata.name}}
+        </p>
+        <p>
+          Album: {{song.metadata.album}}
+        </p>
+      </td>
+      <td>
+          <audio controls="" name="media"><source src="http://localhost:8000/mymusic/mymusic/{{song.id}}" type="audio/mp3"></audio>
+      </td>
+    </tr>
+    {% endfor %}
+  </table
+  </div>
+  {{errors}}
 {%endblock%}

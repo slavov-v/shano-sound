@@ -1,10 +1,5 @@
 from django.contrib import admin
-from chat.models import Chat, Message
-
-
-@admin.register(Chat)
-class ChatAdmin(admin.ModelAdmin):
-    list_display = ['id']
+from chat.models import Message
 
 
 @admin.register(Message)

@@ -19,7 +19,7 @@ class RegisterView(FormView):
     form_class = RegisterAndLoginForm
 
     def form_valid(self, form):
-        # import ipdb; ipdb.set_trace()
+        import ipdb; ipdb.set_trace()
         user = form.save()
         return redirect('/login')
 
@@ -50,15 +50,13 @@ class LoginView(FormView):
 
     def dispatch(self, *args, **kwargs):
         self.error = None
-        # import ipdb; ipdb.set_trace()
         return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
         user = authenticate(email=email, password=password, username=email)
-        import ipdb; ipdb.set_trace()
-
+        
         if user is None:
             self.error = "Invalid email or password"
             return self.form_invalid(form)
@@ -68,7 +66,9 @@ class LoginView(FormView):
         #     return self.form_invalid(form)
 
         login(self.request, user)
-        # import ipdb; ipdb.set_trace()
+        user_instance = BaseUser.objects.get(email=self.request.user.email)
+        user_instance.is_online = True
+        user_instance.save()
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -76,31 +76,9 @@ class LoginView(FormView):
         context['error'] = self.error
         return context
 
-# def login_view(request):
-#     if request.method == 'POST':
-#         login_form = RegisterAndLoginForm(request.POST)
-#         if not User.exists(request.POST['email']):
-#             # import ipdb; ipdb.set_trace()
-#             return redirect('/register')
-#         else:
-#             if User.validate_password(request.POST['email'], request.POST['password']):
-#                 request.session['email'] = request.POST['email']
-#                 return redirect('/profile')
-#             else:
-#                 error = "Invalid password"
-#     if request.method == 'GET':
-#         # import ipdb; ipdb.set_trace()
-#         login_form = RegisterAndLoginForm()
-#         if session_exists(request):
-#             return redirect('/profile')
-#         return render(request, 'login_form.html', locals())
-
-# def temp_profile_view(request, *args, **kwargs):
-#     user_email = request.session['email']
-#     return render(request, 'profile_page.html', locals())
-
 @login_required
 def log_out_view(request):
+    request.user.is_online = False
     logout(request)
     return redirect('/login')
 
@@ -117,7 +95,6 @@ class AddFriendView(LoginRequiredMixin, View):
 
     def post(self, request):
         form = AddFriendForm(request.POST)
-        import ipdb; ipdb.set_trace()
         if form.is_valid():
             try:
                 form.save(email=request.user.email)
@@ -132,5 +109,4 @@ class FriendListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         qs = BaseUser.objects.get(email=self.request.user.email).friends.all()
-        # import ipdb; ipdb.set_trace()
         return qs

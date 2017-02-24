@@ -1,93 +1,64 @@
-{%extends 'header.html'%}
-{%block content%}
-<!DOCTYPE html>
-<html>
-  <head>
+{% extends 'base.html' %}
+
+{% block extra_headers %}
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-  </head>
-  <style>
-  h1, h2, input, button {
-    font-family: fantasy;
-  }
-  body {
-      position: relative;
-  }
-  .affix {
-      top:0;
-      width: 100%;
-      z-index: 9999 !important;
-  }
-  .navbar {
-      margin-bottom: 0px;
-  }
+    <style>
+    h1, h2, input, button {
+      font-family: fantasy;
+    }
+    body {
+        position: relative;
+    }
+    .affix {
+        top:0;
+        width: 100%;
+        z-index: 9999 !important;
+    }
+    .navbar {
+        margin-bottom: 0px;
+    }
 
-  .affix ~ .container-fluid {
-     position: relative;
-     top: 50px;
-  }
-  #section1 {padding-top:50px;height:250px;color: #fff; background-color: #1E88E5;}
-  #section2 {padding-top:50px;height:250px;color: #fff; background-color: #673ab7;}
-  #section3 {padding-top:50px;height:250px;color: #fff; background-color: #ff9800;}
-  #section41 {padding-top:50px;height:250px;color: #fff; background-color: #00bcd4;}
-  #section42 {padding-top:50px;height:250px;color: #fff; background-color: #009688;}
-  </style>
-</head>
-<body data-spy="scroll" data-target=".navbar" data-offset="50">
-<div class="container">
-  <div class="jumbotron">
-    <h2>Your profile</h2>
-    <div class="container">
-      <p style="font-family: fantasy">
-        Logged as : {{session_email}}
-      </p>
-    <div/>
-  </div>
-</div>
-<form class="" action="/logout" method="get">
-  <input class="btn btn-primary btn-block" type="submit" name="name" value="Log out">
-</form>
-<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
-  <div class="container-fluid">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Shano Sound</a>
-    </div>
+    .affix ~ .container-fluid {
+       position: relative;
+       top: 50px;
+    }
+    </style>
+{% endblock extra_headers %}
+
+{% block content %}
+<div class="container well">
+  
+  <div class="row ">
     <div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li><a href="#section1">Friends</a></li>
-          <li><a href="#section2">My Playlist</a></li>
-        </ul>
+      <h2>Your profile</h2>
+      <div>
+        <p style="font-family: fantasy">
+          Logged as : {{request.user}}
+        </p>
       </div>
     </div>
   </div>
-</nav>
-
-<div id="section1" class="well container-fluid">
-  <h1 style="color:black">Friends</h1>
-  <a href="/friends">
-    <button class="btn btn-primary btn-lg" type="button" name="button">View your friend list</button>
-  </a>
-</div>
-<div id="section2" class="well container-fluid">
-  <h1 style="color:black">My Playlist</h1>
-  <a href="/mymusic">
-    <button class="btn btn-primary btn-lg" type="button" name="button">View my playlist</button>
-  </a>
-</div>
-<div id="section3" class="well container-fluid">
-  <h1 style="color:black">Settings</h1>
-  <a href="/settings">
-    <button class="btn btn-primary btn-lg" type="button" name="button">View settings</button>
-  </a>
-</div>
-</body>
-</html>
-{%endblock%}
+  <div class="row">
+    <div class="col-md-4">
+      <h1>Friends</h1>
+      <a href="/friends">
+        <button class="btn btn-primary btn-lg" type="button" name="button">View your friend list</button>
+      </a> 
+    </div>
+    <div class="col-md-4">
+      <h1>My Playlist</h1>
+      <a href="/mymusic">
+        <button class="btn btn-primary btn-lg" type="button" name="button">View my playlist</button>
+      </a>
+    </div>
+    <div class="col-md-4">
+      <h1>Chat</h1>
+      <a href="/chat">
+        <button class="btn btn-primary btn-lg" type="button" name="button">Go to Chat</button>
+      </a>
+    </div>
+  </div>
+{% endblock %}

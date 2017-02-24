@@ -33,12 +33,12 @@
     poll();
     $("textarea").keypress(function(e) {
       if(e.which == 13) {
-        $("form").submit();    
+        $("form.chat-send-message").submit();    
       }
     });
 
     $(".message-container").scrollTop($(".message-content").height())
-    $("form").submit(function(e) {
+    $("form.chat-send-message").submit(function(e) {
       e.preventDefault();
       var csrf = $(this).find("input[name='csrfmiddlewaretoken']").val();
       var message = $(this).find("textarea").val();
